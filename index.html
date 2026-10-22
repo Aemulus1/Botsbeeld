@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Botsbeeld — een generator voor tegenstrijdige ideeën</title>
+<style>
+:root{--ink:#17231f;--paper:#f3efe4;--panel:#fffdf7;--muted:#65726c;--line:#d8d5c9;--accent:#cf4d35;--green:#176d58}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.45 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1180px;margin:auto;padding:28px 24px 42px}.top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--green);font-weight:800}.brand{font:800 clamp(38px,6vw,66px)/.95 Georgia,serif;letter-spacing:-.055em;margin:8px 0}.intro{color:var(--muted);max-width:560px;margin:12px 0 0}.credit{font:italic 15px Georgia,serif;color:#77776a;white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(270px,345px) minmax(0,1fr);gap:20px;align-items:start}.controls,.art-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 32px #2730260a}.controls{padding:22px}.section-title{font:700 20px Georgia,serif;margin:0 0 16px}.field{margin:0 0 17px}.field label{display:flex;justify-content:space-between;font-size:13px;font-weight:750;margin-bottom:7px}.field small{color:var(--muted);font-weight:500}.field select,.field input[type=text]{width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;color:var(--ink)}.field select:focus,.field input:focus{outline:3px solid #176d5825;border-color:var(--green)}.slider{width:100%;accent-color:var(--green)}.clash{display:grid;grid-template-columns:1fr 30px 1fr;gap:8px;align-items:center}.clash span{font:italic 18px Georgia,serif;text-align:center;color:var(--accent)}.buttons{display:flex;gap:9px;margin-top:20px}.buttons button{border:0;border-radius:10px;padding:12px 15px;font:700 14px ui-sans-serif,system-ui,sans-serif;cursor:pointer}.generate{background:var(--green);color:white;flex:1}.download{background:#e9e5d9;color:var(--ink)}button:hover{filter:brightness(.96);transform:translateY(-1px)}button:focus-visible{outline:3px solid #cf4d3566;outline-offset:2px}.idea{border-top:1px solid var(--line);padding-top:15px;margin-top:17px;font:italic 15px/1.5 Georgia,serif;color:#52605a}.art-card{padding:14px}.canvas-wrap{position:relative;overflow:hidden;border-radius:12px;background:#e9e1d2}.canvas-wrap canvas{display:block;width:100%;height:auto;aspect-ratio:1}.art-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:13px 5px 2px;font-size:12px;color:var(--muted)}.art-footer strong{color:var(--ink);font-size:13px}.tag{border:1px solid var(--line);border-radius:99px;padding:5px 9px;white-space:nowrap}
+@media(max-width:790px){main{padding:20px 14px 32px}.top{display:block}.credit{display:block;margin-top:8px}.layout{grid-template-columns:1fr}.controls{order:2}.art-card{order:1}.field{margin-bottom:13px}.controls{padding:17px}.art-card{padding:9px}}
+</style>
+</head>
+<body><main>
+<header class="top"><div><div class="eyebrow">Teekay &amp; Omnia · beeldproef 01</div><h1 class="brand">Botsbeeld</h1><p class="intro">Een afbeeldingsgenerator die twee ideeën tegen elkaar aan laat schuren. Kies een wereld, kies haar tegendeel, en kijk wat ertussen groeit.</p></div><div class="credit">Geen prompt-perfectie. Wel een beeld met wrijving.</div></header>
+<div class="layout"><section class="controls" aria-label="Generatorinstellingen"><h2 class="section-title">Stel de botsing samen</h2>
+<div class="field"><label for="one">Eerste idee <small>de wereld</small></label><select id="one"><option value="city">Een stad</option><option value="forest">Een bos</option><option value="sea">Een zee</option><option value="desert">Een woestijn</option><option value="garden">Een tuin</option><option value="moon">De maan</option></select></div>
+<div class="field"><label for="two">Tweede idee <small>de indringer</small></label><select id="two"><option value="flower">die groeit als een bloem</option><option value="machine">die denkt als een machine</option><option value="animal">bewoond door reusachtige dieren</option><option value="water">waar water naar boven valt</option><option value="theatre">die zichzelf opvoert</option><option value="memory">gemaakt van herinneringen</option></select></div>
+<div class="field"><label for="mood">Sfeer</label><select id="mood"><option value="dawn">Net voor zonsopgang</option><option value="storm">Vlak voor onweer</option><option value="dream">Alsof je het je herinnert</option><option value="joy">Onverwacht vrolijk</option><option value="quiet">Stil en verlaten</option></select></div>
+<div class="field"><label for="blend">Hoe hard botsen ze? <small id="blendVal">65%</small></label><input class="slider" id="blend" type="range" min="10" max="100" value="65"></div>
+<div class="field"><label for="title">Geef je beeld een naam</label><input id="title" type="text" maxlength="42" value="De tuin die de stad droomde" placeholder="Een titel, als je wil"></div>
+<div class="buttons"><button class="generate" id="make">✦ Laat botsen</button><button class="download" id="save">PNG ↓</button></div><p class="idea" id="recipe">“Een stad die groeit als een bloem, net voor zonsopgang.”</p>
+</section><section class="art-card" aria-label="Gegenereerd beeld"><div class="canvas-wrap"><canvas id="art" width="900" height="900" aria-label="Gegenereerde abstracte illustratie"></canvas></div><div class="art-footer"><strong id="artTitle">De tuin die de stad droomde</strong><span class="tag" id="styleTag">BOTSBEELD · 65%</span></div></section></div></main>
+<script>
+const $=s=>document.querySelector(s), c=$('#art'),x=c.getContext('2d'),W=c.width,H=c.height;
+const worlds={city:'Een stad',forest:'Een bos',sea:'Een zee',desert:'Een woestijn',garden:'Een tuin',moon:'De maan'};
+const guests={flower:'die groeit als een bloem',machine:'die denkt als een machine',animal:'bewoond door reusachtige dieren',water:'waar water naar boven valt',theatre:'die zichzelf opvoert',memory:'gemaakt van herinneringen'};
+const moods={dawn:'net voor zonsopgang',storm:'vlak voor onweer',dream:'alsof je het je herinnert',joy:'onverwacht vrolijk',quiet:'stil en verlaten'};
+let seed=1917;
+function rng(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}function pick(a){return a[Math.floor(rng()*a.length)]}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+function render(){seed=(Date.now() ^ Math.floor(Math.random()*1e9))>>>0;const world=$('#one').value,guest=$('#two').value,mood=$('#mood').value,blend=+$('#blend').value/100;
+const palettes={dawn:['#edb48c','#f5d7a3','#395d56','#143e43','#e46c50'],storm:['#687f87','#b1b5a3','#354d50','#1c3036','#d59b62'],dream:['#b5a9c6','#e5c9b4','#576a79','#302d50','#eb886e'],joy:['#f3c85f','#f5e5ae','#4e8b72','#284d5c','#e65c45'],quiet:['#a8aaa0','#d6c8ad','#596660','#343e3b','#c77654']};let p=palettes[mood];
+let bg=x.createLinearGradient(0,0,0,H);bg.addColorStop(0,p[0]);bg.addColorStop(.55,p[1]);bg.addColorStop(1,'#d9c8a8');x.fillStyle=bg;x.fillRect(0,0,W,H);
+// far landscape strata
+x.fillStyle=p[2];x.beginPath();x.moveTo(0,545);for(let i=0;i<=10;i++){let xx=i*90;x.lineTo(xx,490+rng()*95)}x.lineTo(W,H);x.lineTo(0,H);x.closePath();x.fill();
+x.fillStyle=p[3];x.beginPath();x.moveTo(0,645);for(let i=0;i<=12;i++)x.lineTo(i*75,590+rng()*75);x.lineTo(W,H);x.lineTo(0,H);x.closePath();x.fill();
+// atmospheric orb
+x.globalAlpha=.8;x.fillStyle=p[4];x.beginPath();x.arc(680+rng()*80,210+rng()*65,92+rng()*28,0,Math.PI*2);x.fill();x.globalAlpha=1;
+// texture flecks
+for(let i=0;i<1300;i++){let xx=rng()*W,yy=rng()*H;x.fillStyle=rng()>.5?'#fff':'#152a27';x.globalAlpha=.035+rng()*.06;x.fillRect(xx,yy,2+rng()*5,2+rng()*5)}x.globalAlpha=1;
+const baseCount=world==='city'?7:world==='forest'?13:world==='sea'?6:world==='desert'?5:world==='garden'?11:8;
+// world forms; an architectural skyline that can become trunks, waves, dunes, or petals
+for(let i=0;i<baseCount;i++){let xx=35+i*(W-70)/baseCount+(rng()-.5)*32, base=world==='sea'?530:world==='desert'?590:world==='forest'||world==='garden'?640:650;let height=(150+rng()*300)*(0.65+blend*.58),width=world==='forest'||world==='garden'?22+rng()*22:55+rng()*42;
+if(world==='sea'){x.fillStyle=i%2?p[2]:p[3];x.beginPath();x.moveTo(xx,base);x.quadraticCurveTo(xx+40,base-30,xx+80,base);x.quadraticCurveTo(xx+120,base+30,xx+160,base);x.lineTo(xx+160,H);x.lineTo(xx,H);x.fill();continue}
+if(world==='desert'){x.fillStyle=i%2?p[2]:p[3];x.beginPath();x.ellipse(xx,base+60,width*1.8,height*.38,0,Math.PI,Math.PI*2);x.lineTo(xx+width*1.8,base+200);x.lineTo(xx-width*1.8,base+200);x.fill();continue}
+if(world==='forest'||world==='garden'){x.fillStyle=p[3];x.fillRect(xx-width/5,base-height*.55,width/2,height*.55);x.fillStyle=p[2];x.beginPath();x.arc(xx,base-height*.55,width*(1.05+rng()*.5),0,Math.PI*2);x.fill();}else{let top=base-height;x.fillStyle=i%2?p[2]:p[3];roundRect(x,xx,top,width,height,8);x.fillStyle=p[1];for(let wy=top+22;wy<base-12;wy+=30)for(let wx=xx+10;wx<xx+width-8;wx+=22){if(rng()<.68){x.globalAlpha=.4+rng()*.5;x.fillRect(wx,wy,7,11)}}x.globalAlpha=1;}}
+// central hybrid: stem/cable with a geometric bloom-machine crown
+let cx=450, ground=760, stemH=270+blend*120;
+x.strokeStyle=p[4];x.lineWidth=14;x.beginPath();x.moveTo(cx,ground);x.bezierCurveTo(cx-60,ground-120,cx+70,ground-240,cx,ground-stemH);x.stroke();
+x.strokeStyle=p[1];x.lineWidth=4;x.beginPath();x.moveTo(cx,ground);x.bezierCurveTo(cx-60,ground-120,cx+70,ground-240,cx,ground-stemH);x.stroke();
+let crownY=ground-stemH;let n=8+Math.round(blend*10);for(let i=0;i<n;i++){let t=Math.PI*2*i/n, len=90+rng()*85, px=cx+Math.cos(t)*len,py=crownY+Math.sin(t)*len*.75;
+x.save();x.translate(px,py);x.rotate(t);x.fillStyle=i%3===0?p[4]:i%2?p[1]:'#e3d6ac';x.beginPath();x.ellipse(0,0,18+blend*25,9+blend*9,0,0,Math.PI*2);x.fill();x.restore();
+x.strokeStyle=p[1];x.lineWidth=3;x.beginPath();x.moveTo(cx,crownY);x.lineTo(px,py);x.stroke();}
+// mechanical ring and eye
+if(guest==='machine'||guest==='animal'){x.strokeStyle=p[3];x.lineWidth=blend>0.55?9:4;x.beginPath();x.arc(cx,crownY,48+blend*24,0,Math.PI*2);x.stroke();x.fillStyle=p[4];x.beginPath();x.arc(cx,crownY,17,0,Math.PI*2);x.fill();x.fillStyle='#f7e8bc';x.beginPath();x.arc(cx,crownY,6,0,Math.PI*2);x.fill();if(guest==='animal'){x.fillStyle=p[3];x.beginPath();x.arc(cx-27,crownY-5,5,0,Math.PI*2);x.arc(cx+27,crownY-5,5,0,Math.PI*2);x.fill();}}
+if(guest==='water'){for(let i=0;i<25;i++){let dx=cx+(rng()-.5)*240,dy=ground-rng()*stemH*1.8;x.strokeStyle=i%2?p[1]:p[4];x.globalAlpha=.45+rng()*.4;x.lineWidth=2+rng()*4;x.beginPath();x.moveTo(dx,dy+22);x.lineTo(dx+(rng()-.5)*20,dy-12);x.stroke()}x.globalAlpha=1;}
+if(guest==='theatre'){x.fillStyle=p[4];x.beginPath();x.moveTo(120,140);x.quadraticCurveTo(260,250,175,510);x.lineTo(110,510);x.closePath();x.fill();x.beginPath();x.moveTo(780,140);x.quadraticCurveTo(640,250,725,510);x.lineTo(790,510);x.closePath();x.fill();x.fillStyle='#f8eac7';x.globalAlpha=.35;x.beginPath();x.ellipse(cx,crownY-20,120,210,0,Math.PI,Math.PI*2);x.fill();x.globalAlpha=1;}
+if(guest==='memory'){for(let i=0;i<9;i++){let dx=150+rng()*600,dy=130+rng()*430;x.save();x.translate(dx,dy);x.rotate((rng()-.5)*.3);x.globalAlpha=.24+rng()*.25;x.fillStyle=i%2?'#f7eacb':p[4];x.fillRect(-22,-28,44,56);x.fillStyle=p[3];x.fillRect(-14,-17,28,2);x.fillRect(-14,-8,22,2);x.restore()}x.globalAlpha=1;}
+// foreground marks like roots and little impossible windows
+for(let i=0;i<20;i++){let xx=rng()*W, yy=740+rng()*150;x.strokeStyle=i%2?p[1]:p[4];x.globalAlpha=.28+rng()*.35;x.lineWidth=2+rng()*3;x.beginPath();x.moveTo(xx,yy);x.quadraticCurveTo(xx+(rng()-.5)*100,yy-30,xx+(rng()-.5)*140,yy-70);x.stroke()}x.globalAlpha=1;
+// frame and title on image
+x.strokeStyle='#f5e8d1aa';x.lineWidth=3;x.strokeRect(24,24,W-48,H-48);
+const title=$('#title').value.trim()||`${worlds[world]}: ${guests[guest]}`;x.fillStyle='#f8f0de';x.font='600 21px Georgia';x.fillText(title.slice(0,48),48,862);
+$('#artTitle').textContent=title;$('#styleTag').textContent=`BOTSBEELD · ${Math.round(blend*100)}%`;$('#recipe').textContent=`“${worlds[world]} ${guests[guest]}, ${moods[mood]}. ${Math.round(blend*100)}% botsing.”`;
+}
+$('#blend').addEventListener('input',e=>$('#blendVal').textContent=e.target.value+'%');$('#make').addEventListener('click',render);['one','two','mood'].forEach(id=>$('#'+id).addEventListener('change',render));$('#title').addEventListener('input',()=>{if($('#title').value.trim())$('#artTitle').textContent=$('#title').value.trim()});$('#title').addEventListener('change',render);$('#save').addEventListener('click',()=>{const a=document.createElement('a');a.download='botsbeeld.png';a.href=c.toDataURL('image/png');a.click()});render();
+</script></body></html>
